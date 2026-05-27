@@ -2,8 +2,8 @@ package com.pluralsight;
 
 import java.util.List;
 
-public class Order {
-    private List<Priceable> items;
+public class Cart {
+    private List<Sellable> items;
 
     public void getTotalPrice(){
 

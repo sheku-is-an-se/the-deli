@@ -23,7 +23,6 @@ public class UserInterface {
         boolean running = true;
 
         do {
-            System.out.println(prompt);
             int userMenu = PromptParsing.promptForInteger(prompt);
 
 

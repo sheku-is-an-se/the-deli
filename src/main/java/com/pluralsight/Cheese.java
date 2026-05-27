@@ -1,4 +1,4 @@
 package com.pluralsight;
 
-public class Cheese extends Topping{
+public class Cheese extends Ingredient {
 }

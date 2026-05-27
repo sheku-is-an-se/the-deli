@@ -5,17 +5,17 @@ import java.util.List;
 public class Sandwich extends Product {
     private String bread;
     private boolean toasted;
-    private List<Topping> toppings;
+    private List<Ingredient> ingredients;
 
-    public Sandwich(String size, String type, String bread, boolean toasted, List<Topping> toppings) {
+    public Sandwich(String size, String type, String bread, boolean toasted, List<Ingredient> ingredients) {
         super("Sandwich", size, type);
         this.bread = bread;
         this.toasted = toasted;
-        this.toppings = toppings;
+        this.ingredients = ingredients;
     }
 
-    public void addTopping(Topping topping) {
-        this.toppings.add(topping);
+    public void addTopping(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
     }
 
     @Override
