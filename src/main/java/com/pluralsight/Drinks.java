@@ -3,8 +3,8 @@ package com.pluralsight;
 public class Drinks extends Product {
     private String flavor;
 
-    public Drinks(String size, String flavor) {
-        super("Drink", size);
+    public Drinks(String size, String flavor, String type) {
+        super("Drink", size, type);
         this.flavor = flavor;
     }
 
@@ -12,12 +12,17 @@ public class Drinks extends Product {
         return flavor;
     }
 
-    public void setFlavor(String flavor) {
-        this.flavor = flavor;
-    }
-
     @Override
     public double getPrice() {
-        return 0;
+        switch (this.getSize().toLowerCase()) {
+            case "small":
+                return 2.00;
+            case "medium":
+                return 2.50;
+            case "large":
+                return 3.00;
+            default:
+                return 0.0;
+        }
     }
 }
