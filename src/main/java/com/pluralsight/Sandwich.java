@@ -8,16 +8,19 @@ public class Sandwich extends Product {
     private List<Topping> toppings;
 
     public Sandwich(String size, String type, String bread, boolean toasted, List<Topping> toppings) {
-        super("Sandwich",size,type);
+        super("Sandwich", size, type);
         this.bread = bread;
         this.toasted = toasted;
         this.toppings = toppings;
     }
 
+    public void addTopping(Topping topping) {
+        this.toppings.add(topping);
+    }
 
     @Override
     public double getPrice() {
-        if (this.getSize().equals("4")){
+        if (this.getSize().equals("4")) {
             return 5.50;
         } else if (this.getSize().equals("8")) {
             return 7.50;
