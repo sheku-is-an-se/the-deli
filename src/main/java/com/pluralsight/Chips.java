@@ -1,8 +1,8 @@
 package com.pluralsight;
 
 public class Chips extends Product {
-    public Chips(String name, String size, String type) {
-        super(name, size, type);
+    public Chips(String name, String size) {
+        super(name, size);
     }
 
     @Override

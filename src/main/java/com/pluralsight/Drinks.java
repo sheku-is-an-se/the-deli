@@ -4,9 +4,10 @@ public class Drinks extends Product {
     private String flavor;
 
     public Drinks(String size, String flavor, String type) {
-        super("Drink", size, type);
+        super("Drink", size);
         this.flavor = flavor;
     }
+
 
     public String getFlavor() {
         return flavor;

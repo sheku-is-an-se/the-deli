@@ -7,8 +7,8 @@ public class Sandwich extends Product {
     private boolean toasted;
     private List<Ingredient> ingredients;
 
-    public Sandwich(String size, String type, String bread, boolean toasted, List<Ingredient> ingredients) {
-        super("Sandwich", size, type);
+    public Sandwich(String size, String bread, boolean toasted, List<Ingredient> ingredients) {
+        super("Sandwich", size);
         this.bread = bread;
         this.toasted = toasted;
         this.ingredients = ingredients;
