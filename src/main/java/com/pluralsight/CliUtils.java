@@ -1,3 +1,4 @@
+
 package com.pluralsight;
 
 import java.time.LocalDate;
@@ -6,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class PromptParsing {
+public class CliUtils {
     static Scanner scanner = new Scanner(System.in);
     public static String promptForString(String prompt) {
         String result = "";

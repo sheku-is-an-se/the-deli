@@ -1,29 +1,33 @@
 package com.pluralsight;
 
 public class Drinks extends Product {
-    private String flavor;
+    private String type;
+    private Size size;
 
-    public Drinks(String size, String flavor, String type) {
-        super("Drink", size);
-        this.flavor = flavor;
-    }
+    private double smallBase;
+    private double mediumBase;
+    private double largeBase;
 
+    public Drinks(String name, Size size, String type) {
+        super(name, size);
+        this.type = type;
 
-    public String getFlavor() {
-        return flavor;
+        this.smallBase = 2.00;
+        this.mediumBase = 2.50;
+        this.largeBase = 3.00;
     }
 
     @Override
     public double getPrice() {
-        switch (this.getSize().toLowerCase()) {
-            case "small":
-                return 2.00;
-            case "medium":
-                return 2.50;
-            case "large":
-                return 3.00;
-            default:
-                return 0.0;
+        double base = 0;
+
+        if(this.size == Size.SMALL){
+            base += this.smallBase;
+        } else if (this.size == Size.MEDIUM) {
+            base += this.mediumBase;
+        } else if (this.size == Size.LARGE) {
+            base += this.largeBase;
         }
+        return base;
     }
 }

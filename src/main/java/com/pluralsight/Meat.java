@@ -1,8 +1,5 @@
 package com.pluralsight;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Meat extends Ingredient {
 
     private double smallBase;
@@ -13,7 +10,7 @@ public class Meat extends Ingredient {
     private double largeExtra;
 
     public Meat(String name, boolean isExtra, boolean isPremium, String type) {
-        super(name, isExtra, true, type);
+        super(name, isExtra, isPremium, type);
 
         this.smallBase = 1.00;
         this.smallExtra = 0.50;
@@ -23,30 +20,25 @@ public class Meat extends Ingredient {
         this.largeExtra = 1.50;
     }
 
+    @Override
+    public double getPrice(Size size) {
+        double base = 0;
+        double extraCharge = 0;
 
-
-    public double getPrice(Size size){
-
-       double base = 0;
-       double extraCharge = 0;
-
-        if(size == Size.SMALL){
+        if (size == Size.SMALL) {
             base = this.smallBase;
             extraCharge = this.smallExtra;
         } else if (size == Size.MEDIUM) {
             base = this.mediumBase;
             extraCharge = this.mediumExtra;
-
         } else if (size == Size.LARGE) {
             base = this.largeBase;
             extraCharge = this.largeExtra;
-
         }
 
-        if(isExtra()){
+        if (isExtra()) {
             base += extraCharge;
         }
-
 
         return base;
     }

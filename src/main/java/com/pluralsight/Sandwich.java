@@ -7,29 +7,50 @@ public class Sandwich extends Product {
     private boolean toasted;
     private List<Ingredient> ingredients;
 
-    public Sandwich(String size, String bread, boolean toasted, List<Ingredient> ingredients) {
-        super("Sandwich", size);
+    private double smallBreadBase;
+    private double mediumBreadBase;
+    private double largeBreadBase;
+
+    public Sandwich(String name, Size size, String bread, boolean toasted, List<Ingredient> ingredients) {
+        super(name, size);
         this.bread = bread;
         this.toasted = toasted;
         this.ingredients = ingredients;
+
+        this.smallBreadBase = 5.50;
+        this.mediumBreadBase = 7.00;
+        this.largeBreadBase = 8.50;
     }
 
     public void addTopping(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
 
-    @Override
-    public double getPrice() {
-        if (this.getSize().equals("4")) {
-            return 5.50;
-        } else if (this.getSize().equals("8")) {
-            return 7.50;
+    public double getBreadPrice(Size size) {
+        double base = 0;
 
-        } else if (this.getSize().equals("12")) {
-            return 9.50;
-
+        if (size == Size.SMALL) {
+            base = this.smallBreadBase;
+        } else if (size == Size.MEDIUM) {
+            base = this.mediumBreadBase;
+        } else if (size == Size.LARGE) {
+            base = this.largeBreadBase;
         }
 
-        return 0.0;
+        return base;
+    }
+
+    @Override
+    public double getPrice() {
+        double totalPrice = 0;
+        Size size = getSize();
+
+        for (Ingredient i : ingredients) {
+            totalPrice += i.getPrice(size);
+        }
+
+        totalPrice += getBreadPrice(size);
+
+        return totalPrice;
     }
 }

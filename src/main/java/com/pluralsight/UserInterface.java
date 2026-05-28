@@ -23,7 +23,7 @@ public class UserInterface {
         boolean running = true;
 
         do {
-            int userMenu = PromptParsing.promptForInteger(prompt);
+            int userMenu = CliUtils.promptForInteger(prompt);
 
 
             switch (userMenu) {
@@ -63,7 +63,7 @@ public class UserInterface {
         boolean running = true;
 
         do {
-            int userMenu = PromptParsing.promptForInteger(prompt);
+            int userMenu = CliUtils.promptForInteger(prompt);
 
 
             switch (userMenu) {
@@ -92,28 +92,104 @@ public class UserInterface {
     }
 
     public void sandwichScreen() {
+        String bread = """ 
+                Select your bread
+                
+                1) Bread
+                2) white
+                3) wheat
+                4) rye
+                5) wrap""";
+
+        String sandwichSize = """
+                Select your sandwich size:
+                
+                1) SMALL
+                2) MEDIUM
+                3) LARGE
+                
+                """;
+
+        String meat = """
+                Select your meat
+                
+                1) steak
+                2) ham
+                3) salami
+                4) roast beef
+                5) chicken
+                6) bacon
+                0) No meat
+     
+                """;
+
+        String cheese = """
+                Select your Cheese:
+               
+                1) american
+                2) provolone
+                3) cheddar
+                4) swiss
+                0) No cheese
+     
+                """;
+
+        String toppings = """
+                Select your Toppings:
+               
+               
+                1) lettuce
+                2) peppers
+                3) onions
+                4) tomatoes
+                5) jalapeños
+                6) cucumbers
+                7) pickles
+                8) guacamole
+                9) mushrooms
+                0) Stop adding toppings 
+     
+                """;
+
+        String[] toppingss = {"lettuce", "peppers", "onions"};
+
+        int index = 0;
+
+        for(String t: toppingss){
+            index++;
+            System.out.println(index + t);
+        }if(userInput)
+
+
+
+        scanner.nextLine();
+
         String prompt = """
                 ╔══════════════════════════════════════════════╗
-                ║                 THE-DELI                     ║
+                ║              THE-DELI SANDWICH SHOP          ║
                 ╠══════════════════════════════════════════════╣
-                ║            Customize your sandwich           ║
+                ║               Build and manage order         ║
                 ╚══════════════════════════════════════════════╝
                 
-                                ADD SANDWICH
+                                 ORDER SCREEN
                 ------------------------------------------------
-                Follow the steps to build your sandwich.
+                [1] Add Sandwich
+                [2] Add Drink
+                [3] Add Chips
+                [4] Checkout
+                [0] Cancel Order
                 ------------------------------------------------
-                """;
+                Enter your choice:\s""";
 
         boolean running = true;
 
         do {
-            int userMenu = PromptParsing.promptForInteger(prompt);
+            int userMenu = CliUtils.promptForInteger(prompt);
 
 
             switch (userMenu) {
                 case 1:
-                    System.out.println("Add Sandwich!");
+                    sandwichScreen();
                     break;
                 case 2:
                     System.out.println("Add Drink");

@@ -2,10 +2,10 @@ package com.pluralsight;
 
 public abstract class Ingredient {
 
-    private String name;
     private boolean isExtra;
     private boolean isPremium;
     private String type;
+    private String name;
 
     public Ingredient(String name, boolean isExtra, boolean isPremium, String type) {
         this.name = name;
@@ -29,4 +29,6 @@ public abstract class Ingredient {
     public String getType() {
         return type;
     }
+
+    public abstract double getPrice(Size size);
 }
