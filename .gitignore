@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Block the entire IntelliJ settings folder and all compiler outputs
+.idea/
+out/
