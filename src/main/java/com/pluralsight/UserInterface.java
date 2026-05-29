@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -43,6 +44,8 @@ public class UserInterface {
     }
 
     public void orderScreen() {
+        ArrayList<Product> currentOrderItems = new ArrayList<>();
+
         String prompt = """
                 ╔══════════════════════════════════════════════╗
                 ║              THE-DELI SANDWICH SHOP          ║
@@ -68,7 +71,8 @@ public class UserInterface {
 
             switch (userMenu) {
                 case 1:
-                    sandwichScreen();
+                    Sandwich sandwich = sandwichScreen();
+                    currentOrderItems.add(sandwich);
                     break;
                 case 2:
                     System.out.println("Add Drink");
@@ -91,10 +95,20 @@ public class UserInterface {
 
     }
 
-    public String sandwichScreen() {
+    public Sandwich sandwichScreen() {
+        //Get the basics first
+        String bread = promptForBread();
+        Size size = promptForSize();
 
+        //Create the sandwich object
+        Sandwich sandwich = new Sandwich("Custom Sandwich", size, bread, false, new ArrayList<>());
 
-        return "";
+        //Add the ingredients using my helpers
+        promptForMeat(sandwich);
+        promptForCheese(sandwich);
+        promptForToppings(sandwich);
+
+        return sandwich;
     }
 
     //helper method for bread prompt
@@ -387,6 +401,60 @@ public class UserInterface {
                 case 9:
                     RegularToppings mushrooms = new RegularToppings("mushrooms", false,false,"Topping");
                     sandwich.addTopping(mushrooms);
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (userMenu != 0);
+    }
+
+    public void promptForSauces(Sandwich sandwich){
+
+        String sauces = """
+                Select your Sauces:
+                
+                
+                1) mayo
+                2) mustard
+                3) ketchup
+                4) ranch
+                5) thousand islands
+                6) vinaigrette
+                0) Stop adding sauces
+                
+                """;
+
+        int userMenu;
+        do {
+            userMenu = CliUtils.promptForInteger(sauces);
+
+            switch (userMenu) {
+                case 1:
+                    RegularToppings mayo = new RegularToppings("Mayo", false,false,"Sauces");
+                    sandwich.addTopping(mayo);
+                    break;
+                case 2:
+                    RegularToppings mustard = new RegularToppings("Mustard", false,false,"Sauces");
+                    sandwich.addTopping(mustard);
+                    break;
+                case 3:
+                    RegularToppings ketchup = new RegularToppings("Ketchup", false,false,"Sauces");
+                    sandwich.addTopping(ketchup);
+                    break;
+                case 4:
+                    RegularToppings ranch = new RegularToppings("Ranch", false,false,"Sauces");
+                    sandwich.addTopping(ranch);
+                    break;
+                case 5:
+                    RegularToppings thousandIslands = new RegularToppings("Thousand Islands", false,false,"Sauces");
+                    sandwich.addTopping(thousandIslands);
+                    break;
+                case 6:
+                    RegularToppings vinaigrette = new RegularToppings("Vinaigrette", false,false,"Sauces");
+                    sandwich.addTopping(vinaigrette);
                     break;
                 case 0:
                     break;
