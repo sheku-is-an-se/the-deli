@@ -321,11 +321,80 @@ public class UserInterface {
                 isExtra = true;
             }
 
-            Cheese cheeseObject = new Cheese(cheeseName,isExtra,true,"Meat");
+            Cheese cheeseObject = new Cheese(cheeseName,isExtra,true,"Cheese");
             sandwich.addTopping(cheeseObject);
         }
 
 
+    }
+
+    public void promptForToppings(Sandwich sandwich){
+
+        String toppings = """
+                Select your Toppings:
+                
+                
+                1) lettuce
+                2) peppers
+                3) onions
+                4) tomatoes
+                5) jalapeños
+                6) cucumbers
+                7) pickles
+                8) guacamole
+                9) mushrooms
+                0) Stop adding toppings 
+                
+                """;
+
+        int userMenu;
+        do {
+            userMenu = CliUtils.promptForInteger(toppings);
+
+            switch (userMenu) {
+                case 1:
+                    RegularToppings lettuce = new RegularToppings("lettuce", false,false,"Topping");
+                    sandwich.addTopping(lettuce);
+                    break;
+                case 2:
+                    RegularToppings peppers = new RegularToppings("peppers", false,false,"Topping");
+                    sandwich.addTopping(peppers);
+                    break;
+                case 3:
+                    RegularToppings onions = new RegularToppings("onions", false,false,"Topping");
+                    sandwich.addTopping(onions);
+                    break;
+                case 4:
+                    RegularToppings tomatoes = new RegularToppings("tomatoes", false,false,"Topping");
+                    sandwich.addTopping(tomatoes);
+                    break;
+                case 5:
+                    RegularToppings jalapenos = new RegularToppings("jalapenos", false,false,"Topping");
+                    sandwich.addTopping(jalapenos);
+                    break;
+                case 6:
+                    RegularToppings cucumbers = new RegularToppings("cucumbers", false,false,"Topping");
+                    sandwich.addTopping(cucumbers);
+                    break;
+                case 7:
+                    RegularToppings pickles = new RegularToppings("pickles", false,false,"Topping");
+                    sandwich.addTopping(pickles);
+                    break;
+                case 8:
+                    RegularToppings guacamole = new RegularToppings("guacamole", false,false,"Topping");
+                    sandwich.addTopping(guacamole);
+                    break;
+                case 9:
+                    RegularToppings mushrooms = new RegularToppings("mushrooms", false,false,"Topping");
+                    sandwich.addTopping(mushrooms);
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (userMenu != 0);
     }
 
 
