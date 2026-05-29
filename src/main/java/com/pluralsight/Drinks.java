@@ -31,6 +31,6 @@ public class Drinks extends Product {
 
     @Override
     public String toString(){
-        return getSize() + " Drink - $" + getPrice();
+        return getSize() + " Drink: $" + getPrice();
     }
 }

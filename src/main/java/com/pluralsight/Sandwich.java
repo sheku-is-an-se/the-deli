@@ -5,7 +5,7 @@ import java.util.List;
 public class Sandwich extends Product {
     private String bread;
     private boolean toasted;
-    private List<Ingredient> ingredients;
+    private final List<Ingredient> ingredients;
 
     private double smallBreadBase;
     private double mediumBreadBase;
@@ -23,7 +23,23 @@ public class Sandwich extends Product {
     }
 
     public void addTopping(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
+        boolean alreadyOnSandwich = false;
+
+        // Looks at each ingredient currently on the sandwich
+        for (Ingredient currentTopping : ingredients) {
+            //currenttoppins represent an ingredient that is already in the ingredients list
+            //ingredient is self explanatory
+            if (currentTopping.getName().equalsIgnoreCase(ingredient.getName()) && !ingredient.isExtra()) {
+                alreadyOnSandwich = true;
+            }
+        }
+
+        //duplicate checks
+        if (alreadyOnSandwich) {
+            System.out.println("Yo, what's up with the " + ingredient.getName() + "? " + "Lettuce escort you out of our sandwich shop.");
+        } else {
+            this.ingredients.add(ingredient);
+        }
     }
 
     public double getBreadPrice(Size size) {
@@ -52,5 +68,21 @@ public class Sandwich extends Product {
         totalPrice += getBreadPrice(size);
 
         return totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        String details = "Custom Sandwich\n";
+        details = details + "  - " + getSize() + " " + bread + ": $" + getBreadPrice(getSize()) + "\n";
+
+        for (Ingredient topping : ingredients) {
+            // Calulates price based on sandwich size
+            double toppingPrice = topping.getPrice(getSize());
+
+            // prints the name and price together
+            details = details + "  - " + topping.getName() + ": $" + toppingPrice + "\n";
+        }
+
+        return details;
     }
 }

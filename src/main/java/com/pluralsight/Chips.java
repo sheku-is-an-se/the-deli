@@ -21,6 +21,6 @@ public class Chips extends Product {
 
     @Override
     public String toString(){
-        return getName() + " " + type + " - $" + getPrice();
+        return getName() + " " + type + ": $" + getPrice();
     }
 }

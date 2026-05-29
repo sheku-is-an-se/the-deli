@@ -74,6 +74,7 @@ public class UserInterface {
                 case 1:
                     Sandwich sandwich = sandwichScreen();
                     currentOrderItems.add(sandwich);
+                    promptForSides(currentOrderItems);
                     break;
                 case 2:
                     promptForDrinks(currentOrderItems);
@@ -86,6 +87,7 @@ public class UserInterface {
 
                     FileExporter fileExporter = new FileExporter();
                     fileExporter.saveReceipt(currentOrderItems);
+                    currentOrderItems.clear();
                     break;
                 case 0:
                     running = false;
@@ -369,15 +371,22 @@ public class UserInterface {
             }
         } while (running);
 
-        boolean isExtra = false;
+        Cheese cheeseObject;
         if (userMenu != 0) {
             int extraCheese = CliUtils.promptForInteger(extra);
             if(extraCheese == 1){
-                isExtra = true;
+                cheeseObject = new Cheese(cheeseName,false,true,"Cheese");
+                sandwich.addTopping(cheeseObject);
+                cheeseObject = new Cheese(cheeseName,true,true,"Cheese");
+                sandwich.addTopping(cheeseObject);
+
             }
 
-            Cheese cheeseObject = new Cheese(cheeseName,isExtra,true,"Cheese");
-            sandwich.addTopping(cheeseObject);
+            if(extraCheese == 2){
+                cheeseObject = new Cheese(cheeseName,false,true,"Cheese");
+                sandwich.addTopping(cheeseObject);
+            }
+
         }
 
 
@@ -667,6 +676,47 @@ public class UserInterface {
                 multiDrinks.add(drink);
             }
         }
+    }
+
+    public void promptForSides(List<Product> multiSides){
+        String sides = """
+                Sides
+                - au jus
+                - sauce
+                
+                Do you want to have sides included?
+                
+                1) Yes
+                2) No
+                """;
+
+        boolean running = true;
+        String sideName = "";
+        Sides side;
+        int userMenu;
+
+        do {
+            userMenu = CliUtils.promptForInteger(sides);
+
+            switch (userMenu) {
+                case 1:
+                    sideName = "au jus";
+                    side = new Sides("au jus",Size.NONE);
+                    multiSides.add(side);
+                    side = new Sides("sauce",Size.NONE);
+                    multiSides.add(side);
+                    running = false;
+                    break;
+                case 2:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+
+
     }
 
 

@@ -37,7 +37,7 @@ public class Meat extends Ingredient {
         }
 
         if (isExtra()) {
-            base += extraCharge;
+            return extraCharge;
         }
 
         return base;
