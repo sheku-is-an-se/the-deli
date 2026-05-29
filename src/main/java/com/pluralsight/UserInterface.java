@@ -73,8 +73,10 @@ public class UserInterface {
             switch (userMenu) {
                 case 1:
                     Sandwich sandwich = sandwichScreen();
-                    currentOrderItems.add(sandwich);
-                    promptForSides(currentOrderItems);
+                    if(sandwich != null){
+                        currentOrderItems.add(sandwich);
+                        promptForSides(currentOrderItems);
+                    }
                     break;
                 case 2:
                     promptForDrinks(currentOrderItems);
