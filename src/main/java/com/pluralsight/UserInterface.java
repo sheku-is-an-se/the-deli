@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -107,6 +108,7 @@ public class UserInterface {
         promptForMeat(sandwich);
         promptForCheese(sandwich);
         promptForToppings(sandwich);
+        promptForSauces(sandwich);
 
         return sandwich;
     }
@@ -463,7 +465,171 @@ public class UserInterface {
                     break;
             }
         } while (userMenu != 0);
+
+
+
+
     }
+
+    public void promptForChips(List<Chips> multiChips){
+        String chips = """
+                Select your chips
+                
+                1) bbq
+                2) sour cream and onion
+                3) salt and vinegar
+                4) classic
+                5) cheddar
+                0) No chips
+                
+                """;
+
+        String extra = """
+                Would you like more than one bag of chips?
+                
+                1) yes
+                2) no
+                """;
+
+        String extraQuantity = "Choose your quantity (1-10): ";
+
+        boolean running = true;
+        String chipName = "";
+        int userMenu;
+
+        do {
+            userMenu = CliUtils.promptForInteger(chips);
+
+            switch (userMenu) {
+                case 1:
+                    chipName = "bbq";
+                    running = false;
+                    break;
+                case 2:
+                    chipName = "sour cream and onion";
+                    running = false;
+                    break;
+                case 3:
+                    chipName = "salt and vinegar";
+                    running = false;
+                    break;
+                case 4:
+                    chipName = "classic";
+                    running = false;
+                    break;
+                case 5:
+                    chipName = "cheddar";
+                    running = false;
+                    break;
+                case 0:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+
+        if (userMenu != 0) {
+            int quantity = 1;
+            int extraChips = CliUtils.promptForInteger(extra);
+
+            if (extraChips == 1) {
+                quantity = CliUtils.promptForInteger(extraQuantity);
+            }
+
+            for (int i = 0; i < quantity; i++) {
+                Chips chip = new Chips(chipName, Size.NONE, "Chips");
+                multiChips.add(chip);
+            }
+        }
+    }
+
+    public void promptForDrinks(List<Drinks> multiDrinks){
+        String drinks = """
+            Would you like a drink?
+            
+            1) Yes
+            2) No
+            """;
+
+        String sizeMenu = """
+            What size drink would you like?
+            
+            1) SMALL
+            2) MEDIUM
+            3) LARGE
+            """;
+
+        String extra = """
+            Would you like more than one cup?
+            
+            1) yes
+            2) no
+            """;
+
+        String extraQuantity = "Choose your quantity (1-10): ";
+
+        boolean running = true;
+        int userMenu;
+        do {
+            userMenu = CliUtils.promptForInteger(drinks);
+
+            switch (userMenu) {
+                case 1:
+                    running = false;
+                    break;
+                case 2:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+
+        if (userMenu != 2) {
+            // If they select "yes", then prompt user for size
+            boolean pickingSize = true;
+            Size chosenSize = Size.NONE;
+
+            do {
+                int sizeChoice = CliUtils.promptForInteger(sizeMenu);
+                switch (sizeChoice) {
+                    case 1:
+                        chosenSize = Size.SMALL;
+                        pickingSize = false;
+                        break;
+                    case 2:
+                        chosenSize = Size.MEDIUM;
+                        pickingSize = false;
+                        break;
+                    case 3:
+                        chosenSize = Size.LARGE;
+                        pickingSize = false;
+                        break;
+                    default:
+                        System.out.println("Oops! That wasn't a valid size.");
+                        break;
+                }
+            } while (pickingSize);
+
+            //Handle quantity
+            int quantity = 1;
+            int extraDrinks = CliUtils.promptForInteger(extra);
+
+            if (extraDrinks == 1) {
+                quantity = CliUtils.promptForInteger(extraQuantity);
+            }
+
+            //Create and add drinks
+            for (int i = 0; i < quantity; i++) {
+                Drinks drink = new Drinks("Drink", chosenSize, "Drink");
+                multiDrinks.add(drink);
+            }
+        }
+    }
+
 
 
 }
