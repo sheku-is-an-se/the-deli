@@ -83,6 +83,9 @@ public class UserInterface {
                     break;
                 case 4:
                     checkoutSummary(currentOrderItems);
+
+                    FileExporter fileExporter = new FileExporter();
+                    fileExporter.saveReceipt(currentOrderItems);
                     break;
                 case 0:
                     running = false;
@@ -103,24 +106,30 @@ public class UserInterface {
             return;
         }
 
+        System.out.println("======================================");
+        System.out.println("          RECEIPT SUMMARY             ");
+        System.out.println("======================================");
+
         double total = 0.0;
 
         for(Product p: products){
             System.out.println(p);
             total += p.getPrice();
         }
+        System.out.println("======================================");
+        System.out.println(" TOTAL PRICE: $" + total);
+        System.out.println("======================================");
 
-        System.out.println("Total Price: " + total);
-
-
+        CliUtils.pause();
     }
+
 
     public Sandwich sandwichScreen() {
         //Get the basics first
         String bread = promptForBread();
 
         if (bread == null) {
-            return null; // This exits the sandwich menu and sends them back to the main screen
+            return null;
         }
         Size size = promptForSize();
 
@@ -287,15 +296,22 @@ public class UserInterface {
             }
         } while (running);
 
-        boolean isExtra = false;
+        Meat meatObject;
         if (userMenu != 0) {
             int extraMeat = CliUtils.promptForInteger(extra);
             if(extraMeat == 1){
-                isExtra = true;
+                //Create the regular meat object
+                meatObject = new Meat(meatName, false, true, "Meat");
+                sandwich.addTopping(meatObject);
+// Create the extra meat object
+                meatObject = new Meat(meatName, true, true, "Meat");
+                sandwich.addTopping(meatObject);
+            }
+            if (extraMeat == 2) {
+                meatObject = new Meat(meatName,false,true,"Meat");
+                sandwich.addTopping(meatObject);
             }
 
-            Meat meatObject = new Meat(meatName,isExtra,true,"Meat");
-            sandwich.addTopping(meatObject);
         }
 
 
