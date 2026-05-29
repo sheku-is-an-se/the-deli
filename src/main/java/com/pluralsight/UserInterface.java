@@ -134,9 +134,10 @@ public class UserInterface {
             return null;
         }
         Size size = promptForSize();
+        boolean toasted = promptForToasted();
 
         //Create the sandwich object
-        Sandwich sandwich = new Sandwich("Custom Sandwich", size, bread, false, new ArrayList<>());
+        Sandwich sandwich = new Sandwich("Custom Sandwich", size, bread, toasted, new ArrayList<>());
 
         //Add the ingredients using my helpers
         promptForMeat(sandwich);
@@ -717,6 +718,29 @@ public class UserInterface {
         } while (running);
 
 
+
+
+    }
+
+    public boolean promptForToasted() {
+        String prompt = """
+            Would you like your sandwich toasted?
+            1. Yes
+            2. No
+            """;
+
+        while (true) {
+            int choice = CliUtils.promptForInteger(prompt);
+
+            switch (choice) {
+                case 1:
+                    return true;
+                case 2:
+                    return false;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+            }
+        }
     }
 
 

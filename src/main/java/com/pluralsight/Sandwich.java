@@ -75,6 +75,9 @@ public class Sandwich extends Product {
         String details = "Custom Sandwich\n";
         details = details + "  - " + getSize() + " " + bread + ": $" + getBreadPrice(getSize()) + "\n";
 
+
+        details = details + "  - Toasted: " + toasted + "\n";
+
         for (Ingredient topping : ingredients) {
             // Calulates price based on sandwich size
             double toppingPrice = topping.getPrice(getSize());
