@@ -596,10 +596,24 @@ public class UserInterface {
 
         if (userMenu != 0) {
             int quantity = 1;
-            int extraChips = CliUtils.promptForInteger(extra);
+            int extraChips;
+
+            do {
+                extraChips = CliUtils.promptForInteger(extra);
+
+                if (extraChips != 1 && extraChips != 2) {
+                    System.out.println("Oops! That wasn't a valid option.");
+                }
+            } while (extraChips != 1 && extraChips != 2);
 
             if (extraChips == 1) {
-                quantity = CliUtils.promptForInteger(extraQuantity);
+                do {
+                    quantity = CliUtils.promptForInteger(extraQuantity);
+
+                    if (quantity < 1 || quantity > 10) {
+                        System.out.println("Oops! Please choose a quantity between 1 and 10.");
+                    }
+                } while (quantity < 1 || quantity > 10);
             }
 
             for (int i = 0; i < quantity; i++) {
@@ -678,15 +692,27 @@ public class UserInterface {
                 }
             } while (pickingSize);
 
-            //Handle quantity
             int quantity = 1;
-            int extraDrinks = CliUtils.promptForInteger(extra);
+            int extraDrinks;
+
+            do {
+                extraDrinks = CliUtils.promptForInteger(extra);
+
+                if (extraDrinks != 1 && extraDrinks != 2) {
+                    System.out.println("Oops! That wasn't a valid option.");
+                }
+            } while (extraDrinks != 1 && extraDrinks != 2);
 
             if (extraDrinks == 1) {
-                quantity = CliUtils.promptForInteger(extraQuantity);
+                do {
+                    quantity = CliUtils.promptForInteger(extraQuantity);
+
+                    if (quantity < 1 || quantity > 10) {
+                        System.out.println("Oops! Please choose a quantity between 1 and 10.");
+                    }
+                } while (quantity < 1 || quantity > 10);
             }
 
-            //Create and add drinks
             for (int i = 0; i < quantity; i++) {
                 Drinks drink = new Drinks("Drink", chosenSize, "Drink");
                 multiDrinks.add(drink);
