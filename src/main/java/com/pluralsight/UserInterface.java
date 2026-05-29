@@ -284,5 +284,81 @@ public class UserInterface {
         return selection;
     }
 
+    public void promptForMeat(Sandwich sandwich) {
+        String meat = """
+                Select your meat
+                
+                1) steak
+                2) ham
+                3) salami
+                4) roast beef
+                5) chicken
+                6) bacon
+                0) No meat
+                
+                """;
+
+        String extra = """
+                Do you want extra?
+                
+                1) yes
+                2) no
+                """;
+
+        boolean running = true;
+        String meatName = "";
+        int userMenu;
+        do {
+            userMenu = CliUtils.promptForInteger(meat);
+
+
+            switch (userMenu) {
+                case 1:
+                    meatName = "steak";
+                    running = false;
+                    break;
+                case 2:
+                    meatName = "ham";
+                    running = false;
+                    break;
+                case 3:
+                    meatName = "salami";
+                    running = false;
+                    break;
+                case 4:
+                    meatName = "roast beef";
+                    running = false;
+                    break;
+                case 5:
+                    meatName = "chicken";
+                    running = false;
+                    break;
+                case 6:
+                    meatName = "bacon";
+                    running = false;
+                    break;
+                case 0:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+
+        boolean isExtra = false;
+        if (userMenu != 0) {
+            int extraMeat = CliUtils.promptForInteger(extra);
+            if(extraMeat == 1){
+                isExtra = true;
+            }
+
+            Meat meatObject = new Meat(meatName,isExtra,true,"Meat");
+            sandwich.addTopping(meatObject);
+        }
+
+
+    }
+
 
 }
