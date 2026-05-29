@@ -10,7 +10,7 @@ public class UserInterface {
     public void homeMenu() {
         String prompt = """
                 ╔══════════════════════════════════════════════╗
-                ║              THE-DELI SANDWICH SHOP        ║
+                ║              THE-DELI SANDWICH SHOP          ║
                 ╠══════════════════════════════════════════════╣
                 ║         Create and manage customer orders    ║
                 ╚══════════════════════════════════════════════╝
@@ -109,7 +109,7 @@ public class UserInterface {
         }
 
         System.out.println("======================================");
-        System.out.println("          RECEIPT SUMMARY             ");
+        System.out.println("          CHECKOUT SUMMARY            ");
         System.out.println("======================================");
 
         double total = 0.0;
