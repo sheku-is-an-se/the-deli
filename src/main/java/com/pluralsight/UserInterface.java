@@ -101,7 +101,7 @@ public class UserInterface {
 
     }
 
-    public void checkoutSummary(ArrayList<Product> products){
+    public void checkoutSummary(ArrayList<Product> products) {
         //Checks if its empty before we print out summary
         if (products.isEmpty()) {
             System.out.println("Your cart is empty! Add some items before checking out.");
@@ -114,7 +114,7 @@ public class UserInterface {
 
         double total = 0.0;
 
-        for(Product p: products){
+        for (Product p : products) {
             System.out.println(p);
             total += p.getPrice();
         }
@@ -301,8 +301,17 @@ public class UserInterface {
 
         Meat meatObject;
         if (userMenu != 0) {
-            int extraMeat = CliUtils.promptForInteger(extra);
-            if(extraMeat == 1){
+            int extraMeat;
+
+            do {
+                extraMeat = CliUtils.promptForInteger(extra);
+
+                if (extraMeat != 1 && extraMeat != 2) {
+                    System.err.println("Not a valid option, try again.");
+                }
+            } while (extraMeat != 1 && extraMeat != 2);
+
+            if (extraMeat == 1) {
                 //Create the regular meat object
                 meatObject = new Meat(meatName, false, true, "Meat");
                 sandwich.addTopping(meatObject);
@@ -311,7 +320,7 @@ public class UserInterface {
                 sandwich.addTopping(meatObject);
             }
             if (extraMeat == 2) {
-                meatObject = new Meat(meatName,false,true,"Meat");
+                meatObject = new Meat(meatName, false, true, "Meat");
                 sandwich.addTopping(meatObject);
             }
 
@@ -374,26 +383,32 @@ public class UserInterface {
 
         Cheese cheeseObject;
         if (userMenu != 0) {
-            int extraCheese = CliUtils.promptForInteger(extra);
-            if(extraCheese == 1){
-                cheeseObject = new Cheese(cheeseName,false,true,"Cheese");
-                sandwich.addTopping(cheeseObject);
-                cheeseObject = new Cheese(cheeseName,true,true,"Cheese");
+            int extraCheese;
+
+            do {
+                extraCheese = CliUtils.promptForInteger(extra);
+
+                if (extraCheese != 1 && extraCheese != 2) {
+                    System.out.println("Oops! That wasn't a valid option.");
+                }
+            } while (extraCheese != 1 && extraCheese != 2);
+
+            if (extraCheese == 1) {
+                cheeseObject = new Cheese(cheeseName, false, true, "Cheese");
                 sandwich.addTopping(cheeseObject);
 
+                cheeseObject = new Cheese(cheeseName, true, true, "Cheese");
+                sandwich.addTopping(cheeseObject);
+            } else {
+                cheeseObject = new Cheese(cheeseName, false, true, "Cheese");
+                sandwich.addTopping(cheeseObject);
             }
-
-            if(extraCheese == 2){
-                cheeseObject = new Cheese(cheeseName,false,true,"Cheese");
-                sandwich.addTopping(cheeseObject);
-            }
-
         }
 
 
     }
 
-    public void promptForToppings(Sandwich sandwich){
+    public void promptForToppings(Sandwich sandwich) {
 
         String toppings = """
                 Select your Toppings:
@@ -418,39 +433,39 @@ public class UserInterface {
 
             switch (userMenu) {
                 case 1:
-                    RegularToppings lettuce = new RegularToppings("lettuce", false,false,"Topping");
+                    RegularToppings lettuce = new RegularToppings("lettuce", false, false, "Topping");
                     sandwich.addTopping(lettuce);
                     break;
                 case 2:
-                    RegularToppings peppers = new RegularToppings("peppers", false,false,"Topping");
+                    RegularToppings peppers = new RegularToppings("peppers", false, false, "Topping");
                     sandwich.addTopping(peppers);
                     break;
                 case 3:
-                    RegularToppings onions = new RegularToppings("onions", false,false,"Topping");
+                    RegularToppings onions = new RegularToppings("onions", false, false, "Topping");
                     sandwich.addTopping(onions);
                     break;
                 case 4:
-                    RegularToppings tomatoes = new RegularToppings("tomatoes", false,false,"Topping");
+                    RegularToppings tomatoes = new RegularToppings("tomatoes", false, false, "Topping");
                     sandwich.addTopping(tomatoes);
                     break;
                 case 5:
-                    RegularToppings jalapenos = new RegularToppings("jalapenos", false,false,"Topping");
+                    RegularToppings jalapenos = new RegularToppings("jalapenos", false, false, "Topping");
                     sandwich.addTopping(jalapenos);
                     break;
                 case 6:
-                    RegularToppings cucumbers = new RegularToppings("cucumbers", false,false,"Topping");
+                    RegularToppings cucumbers = new RegularToppings("cucumbers", false, false, "Topping");
                     sandwich.addTopping(cucumbers);
                     break;
                 case 7:
-                    RegularToppings pickles = new RegularToppings("pickles", false,false,"Topping");
+                    RegularToppings pickles = new RegularToppings("pickles", false, false, "Topping");
                     sandwich.addTopping(pickles);
                     break;
                 case 8:
-                    RegularToppings guacamole = new RegularToppings("guacamole", false,false,"Topping");
+                    RegularToppings guacamole = new RegularToppings("guacamole", false, false, "Topping");
                     sandwich.addTopping(guacamole);
                     break;
                 case 9:
-                    RegularToppings mushrooms = new RegularToppings("mushrooms", false,false,"Topping");
+                    RegularToppings mushrooms = new RegularToppings("mushrooms", false, false, "Topping");
                     sandwich.addTopping(mushrooms);
                     break;
                 case 0:
@@ -462,7 +477,7 @@ public class UserInterface {
         } while (userMenu != 0);
     }
 
-    public void promptForSauces(Sandwich sandwich){
+    public void promptForSauces(Sandwich sandwich) {
 
         String sauces = """
                 Select your Sauces:
@@ -484,27 +499,27 @@ public class UserInterface {
 
             switch (userMenu) {
                 case 1:
-                    RegularToppings mayo = new RegularToppings("Mayo", false,false,"Sauces");
+                    RegularToppings mayo = new RegularToppings("Mayo", false, false, "Sauces");
                     sandwich.addTopping(mayo);
                     break;
                 case 2:
-                    RegularToppings mustard = new RegularToppings("Mustard", false,false,"Sauces");
+                    RegularToppings mustard = new RegularToppings("Mustard", false, false, "Sauces");
                     sandwich.addTopping(mustard);
                     break;
                 case 3:
-                    RegularToppings ketchup = new RegularToppings("Ketchup", false,false,"Sauces");
+                    RegularToppings ketchup = new RegularToppings("Ketchup", false, false, "Sauces");
                     sandwich.addTopping(ketchup);
                     break;
                 case 4:
-                    RegularToppings ranch = new RegularToppings("Ranch", false,false,"Sauces");
+                    RegularToppings ranch = new RegularToppings("Ranch", false, false, "Sauces");
                     sandwich.addTopping(ranch);
                     break;
                 case 5:
-                    RegularToppings thousandIslands = new RegularToppings("Thousand Islands", false,false,"Sauces");
+                    RegularToppings thousandIslands = new RegularToppings("Thousand Islands", false, false, "Sauces");
                     sandwich.addTopping(thousandIslands);
                     break;
                 case 6:
-                    RegularToppings vinaigrette = new RegularToppings("Vinaigrette", false,false,"Sauces");
+                    RegularToppings vinaigrette = new RegularToppings("Vinaigrette", false, false, "Sauces");
                     sandwich.addTopping(vinaigrette);
                     break;
                 case 0:
@@ -516,11 +531,9 @@ public class UserInterface {
         } while (userMenu != 0);
 
 
-
-
     }
 
-    public void promptForChips(List<Product> multiChips){
+    public void promptForChips(List<Product> multiChips) {
         String chips = """
                 Select your chips
                 
@@ -594,28 +607,28 @@ public class UserInterface {
         }
     }
 
-    public void promptForDrinks(List<Product> multiDrinks){
+    public void promptForDrinks(List<Product> multiDrinks) {
         String drinks = """
-            Would you like a drink?
-            
-            1) Yes
-            2) No
-            """;
+                Would you like a drink?
+                
+                1) Yes
+                2) No
+                """;
 
         String sizeMenu = """
-            What size drink would you like?
-            
-            1) SMALL
-            2) MEDIUM
-            3) LARGE
-            """;
+                What size drink would you like?
+                
+                1) SMALL
+                2) MEDIUM
+                3) LARGE
+                """;
 
         String extra = """
-            Would you like more than one cup?
-            
-            1) yes
-            2) no
-            """;
+                Would you like more than one cup?
+                
+                1) yes
+                2) no
+                """;
 
         String extraQuantity = "Choose your quantity (1-10): ";
 
@@ -679,7 +692,7 @@ public class UserInterface {
         }
     }
 
-    public void promptForSides(List<Product> multiSides){
+    public void promptForSides(List<Product> multiSides) {
         String sides = """
                 Sides
                 - au jus
@@ -702,9 +715,9 @@ public class UserInterface {
             switch (userMenu) {
                 case 1:
                     sideName = "au jus";
-                    side = new Sides("au jus",Size.NONE);
+                    side = new Sides("au jus", Size.NONE);
                     multiSides.add(side);
-                    side = new Sides("sauce",Size.NONE);
+                    side = new Sides("sauce", Size.NONE);
                     multiSides.add(side);
                     running = false;
                     break;
@@ -718,16 +731,14 @@ public class UserInterface {
         } while (running);
 
 
-
-
     }
 
     public boolean promptForToasted() {
         String prompt = """
-            Would you like your sandwich toasted?
-            1. Yes
-            2. No
-            """;
+                Would you like your sandwich toasted?
+                1. Yes
+                2. No
+                """;
 
         while (true) {
             int choice = CliUtils.promptForInteger(prompt);
@@ -742,7 +753,6 @@ public class UserInterface {
             }
         }
     }
-
 
 
 }
