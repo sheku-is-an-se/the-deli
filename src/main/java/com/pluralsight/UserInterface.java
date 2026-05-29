@@ -194,7 +194,9 @@ public class UserInterface {
         } while (running);
         return selection;
     }
-    public String promptForBread(){
+
+    //helper method for bread prompt
+    public String promptForBread() {
         String bread = """ 
                 Select your bread
                 
@@ -239,5 +241,48 @@ public class UserInterface {
         } while (running);
         return selection;
     }
+
+    public Size promptForSize() {
+        String sandwichSize = """
+                Select your sandwich size:
+                
+                1) SMALL
+                2) MEDIUM
+                3) LARGE
+                
+                """;
+
+        boolean running = true;
+
+        Size selection = null;
+        do {
+            int userMenu = CliUtils.promptForInteger(sandwichSize);
+
+
+            switch (userMenu) {
+                case 1:
+                    running = false;
+                    selection = Size.SMALL;
+                    break;
+                case 2:
+                    running = false;
+                    selection = Size.MEDIUM;
+                    break;
+                case 3:
+                    running = false;
+                    selection = Size.LARGE;
+                    break;
+                case 0:
+                    running = false;
+                    System.out.println("Cancel order");
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+        return selection;
+    }
+
 
 }
