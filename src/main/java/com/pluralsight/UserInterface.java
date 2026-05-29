@@ -92,107 +92,9 @@ public class UserInterface {
     }
 
     public String sandwichScreen() {
-        String bread = """ 
-                Select your bread
-                
-                1) white
-                2) wheat
-                3) rye
-                4) wrap
-                5) cancel order""";
-
-        String sandwichSize = """
-                Select your sandwich size:
-                
-                1) SMALL
-                2) MEDIUM
-                3) LARGE
-                
-                """;
-
-        String meat = """
-                Select your meat
-                
-                1) steak
-                2) ham
-                3) salami
-                4) roast beef
-                5) chicken
-                6) bacon
-                0) No meat
-                
-                """;
-
-        String cheese = """
-                Select your Cheese:
-                
-                1) american
-                2) provolone
-                3) cheddar
-                4) swiss
-                0) No cheese
-                
-                """;
-
-        String toppings = """
-                Select your Toppings:
-                
-                
-                1) lettuce
-                2) peppers
-                3) onions
-                4) tomatoes
-                5) jalapeños
-                6) cucumbers
-                7) pickles
-                8) guacamole
-                9) mushrooms
-                0) Stop adding toppings 
-                
-                """;
-
-        boolean running = true;
-
-        String selection = "";
-        do {
-            int userMenu = CliUtils.promptForInteger(bread);
 
 
-            switch (userMenu) {
-                case 1:
-                    running = false;
-                    selection = "white";
-                    scanner.nextLine();
-                    System.out.println(sandwichSize);
-                    break;
-                case 2:
-                    running = false;
-                    selection = "wheat";
-                    scanner.nextLine();
-                    System.out.println(sandwichSize);
-                    break;
-                case 3:
-                    running = false;
-                    selection = "rye";
-                    scanner.nextLine();
-                    System.out.println(sandwichSize);
-                    break;
-                case 4:
-                    running = false;
-                    selection = "wrap";
-                    scanner.nextLine();
-                    System.out.println(sandwichSize);
-                    break;
-                case 0:
-                    running = false;
-                    System.out.println("Cancel order");
-                    break;
-                default:
-                    System.out.println("Oops! That wasn't a valid option.");
-                    break;
-            }
-        } while (running);
-        return selection;
+        return "";
     }
 
     //helper method for bread prompt
@@ -355,6 +257,72 @@ public class UserInterface {
 
             Meat meatObject = new Meat(meatName,isExtra,true,"Meat");
             sandwich.addTopping(meatObject);
+        }
+
+
+    }
+
+    public void promptForCheese(Sandwich sandwich) {
+        String cheese = """
+                Select your Cheese:
+                
+                1) american
+                2) provolone
+                3) cheddar
+                4) swiss
+                0) No cheese
+                
+                """;
+
+        String extra = """
+                Do you want extra?
+                
+                1) yes
+                2) no
+                """;
+
+        boolean running = true;
+        String cheeseName = "";
+        int userMenu;
+        do {
+            userMenu = CliUtils.promptForInteger(cheese);
+
+
+            switch (userMenu) {
+                case 1:
+                    cheeseName = "american";
+                    running = false;
+                    break;
+                case 2:
+                    cheeseName = "provolone";
+                    running = false;
+                    break;
+                case 3:
+                    cheeseName = "cheddar";
+                    running = false;
+                    break;
+                case 4:
+                    cheeseName = "swiss";
+                    running = false;
+                    break;
+                case 0:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+
+        boolean isExtra = false;
+        if (userMenu != 0) {
+            int extraCheese = CliUtils.promptForInteger(extra);
+            if(extraCheese == 1){
+                isExtra = true;
+            }
+
+            Cheese cheeseObject = new Cheese(cheeseName,isExtra,true,"Meat");
+            sandwich.addTopping(cheeseObject);
         }
 
 
