@@ -12,7 +12,5 @@ public class Main {
 
 
 
-        //Sandwich sandwich = new Sandwich("Sandwich","small", "white", true, ingredients);
-        //System.out.println(sandwich.getPrice());
     }
 }
