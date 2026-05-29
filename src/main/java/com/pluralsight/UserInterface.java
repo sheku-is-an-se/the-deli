@@ -91,15 +91,15 @@ public class UserInterface {
 
     }
 
-    public void sandwichScreen() {
+    public String sandwichScreen() {
         String bread = """ 
                 Select your bread
                 
-                1) Bread
-                2) white
-                3) wheat
-                4) rye
-                5) wrap""";
+                1) white
+                2) wheat
+                3) rye
+                4) wrap
+                5) cancel order""";
 
         String sandwichSize = """
                 Select your sandwich size:
@@ -120,24 +120,24 @@ public class UserInterface {
                 5) chicken
                 6) bacon
                 0) No meat
-     
+                
                 """;
 
         String cheese = """
                 Select your Cheese:
-               
+                
                 1) american
                 2) provolone
                 3) cheddar
                 4) swiss
                 0) No cheese
-     
+                
                 """;
 
         String toppings = """
                 Select your Toppings:
-               
-               
+                
+                
                 1) lettuce
                 2) peppers
                 3) onions
@@ -148,57 +148,40 @@ public class UserInterface {
                 8) guacamole
                 9) mushrooms
                 0) Stop adding toppings 
-     
-                """;
-
-        String[] toppingss = {"lettuce", "peppers", "onions"};
-
-        int index = 0;
-
-        for(String t: toppingss){
-            index++;
-            System.out.println(index + t);
-        }if(userInput)
-
-
-
-        scanner.nextLine();
-
-        String prompt = """
-                ╔══════════════════════════════════════════════╗
-                ║              THE-DELI SANDWICH SHOP          ║
-                ╠══════════════════════════════════════════════╣
-                ║               Build and manage order         ║
-                ╚══════════════════════════════════════════════╝
                 
-                                 ORDER SCREEN
-                ------------------------------------------------
-                [1] Add Sandwich
-                [2] Add Drink
-                [3] Add Chips
-                [4] Checkout
-                [0] Cancel Order
-                ------------------------------------------------
-                Enter your choice:\s""";
+                """;
 
         boolean running = true;
 
+        String selection = "";
         do {
-            int userMenu = CliUtils.promptForInteger(prompt);
+            int userMenu = CliUtils.promptForInteger(bread);
 
 
             switch (userMenu) {
                 case 1:
-                    sandwichScreen();
+                    running = false;
+                    selection = "white";
+                    scanner.nextLine();
+                    System.out.println(sandwichSize);
                     break;
                 case 2:
-                    System.out.println("Add Drink");
+                    running = false;
+                    selection = "wheat";
+                    scanner.nextLine();
+                    System.out.println(sandwichSize);
                     break;
                 case 3:
-                    System.out.println("Add Chips!");
+                    running = false;
+                    selection = "rye";
+                    scanner.nextLine();
+                    System.out.println(sandwichSize);
                     break;
                 case 4:
-                    System.out.println("Checkout");
+                    running = false;
+                    selection = "wrap";
+                    scanner.nextLine();
+                    System.out.println(sandwichSize);
                     break;
                 case 0:
                     running = false;
@@ -209,6 +192,52 @@ public class UserInterface {
                     break;
             }
         } while (running);
-
+        return selection;
     }
+    public String promptForBread(){
+        String bread = """ 
+                Select your bread
+                
+                1) white
+                2) wheat
+                3) rye
+                4) wrap
+                5) cancel order""";
+
+        boolean running = true;
+
+        String selection = "";
+        do {
+            int userMenu = CliUtils.promptForInteger(bread);
+
+
+            switch (userMenu) {
+                case 1:
+                    running = false;
+                    selection = "white";
+                    break;
+                case 2:
+                    running = false;
+                    selection = "wheat";
+                    break;
+                case 3:
+                    running = false;
+                    selection = "rye";
+                    break;
+                case 4:
+                    running = false;
+                    selection = "wrap";
+                    break;
+                case 0:
+                    running = false;
+                    System.out.println("Cancel order");
+                    break;
+                default:
+                    System.out.println("Oops! That wasn't a valid option.");
+                    break;
+            }
+        } while (running);
+        return selection;
+    }
+
 }
