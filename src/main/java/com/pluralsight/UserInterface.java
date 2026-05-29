@@ -76,13 +76,13 @@ public class UserInterface {
                     currentOrderItems.add(sandwich);
                     break;
                 case 2:
-                    System.out.println("Add Drink");
+                    promptForDrinks(currentOrderItems);
                     break;
                 case 3:
-                    System.out.println("Add Chips!");
+                    promptForChips(currentOrderItems);
                     break;
                 case 4:
-                    System.out.println("Checkout");
+                    checkoutSummary(currentOrderItems);
                     break;
                 case 0:
                     running = false;
@@ -96,9 +96,32 @@ public class UserInterface {
 
     }
 
+    public void checkoutSummary(ArrayList<Product> products){
+        //Checks if its empty before we print out summary
+        if (products.isEmpty()) {
+            System.out.println("Your cart is empty! Add some items before checking out.");
+            return;
+        }
+
+        double total = 0.0;
+
+        for(Product p: products){
+            System.out.println(p);
+            total += p.getPrice();
+        }
+
+        System.out.println("Total Price: " + total);
+
+
+    }
+
     public Sandwich sandwichScreen() {
         //Get the basics first
         String bread = promptForBread();
+
+        if (bread == null) {
+            return null; // This exits the sandwich menu and sends them back to the main screen
+        }
         Size size = promptForSize();
 
         //Create the sandwich object
@@ -148,10 +171,10 @@ public class UserInterface {
                     running = false;
                     selection = "wrap";
                     break;
-                case 0:
+                case 5:
                     running = false;
-                    System.out.println("Cancel order");
-                    break;
+                    System.out.println("Canceled order");
+                    return null;
                 default:
                     System.out.println("Oops! That wasn't a valid option.");
                     break;
@@ -471,7 +494,7 @@ public class UserInterface {
 
     }
 
-    public void promptForChips(List<Chips> multiChips){
+    public void promptForChips(List<Product> multiChips){
         String chips = """
                 Select your chips
                 
@@ -545,7 +568,7 @@ public class UserInterface {
         }
     }
 
-    public void promptForDrinks(List<Drinks> multiDrinks){
+    public void promptForDrinks(List<Product> multiDrinks){
         String drinks = """
             Would you like a drink?
             

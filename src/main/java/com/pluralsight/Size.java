@@ -1,5 +1,5 @@
 package com.pluralsight;
 
 public enum Size {
-    SMALL, MEDIUM, LARGE
+    SMALL, MEDIUM, LARGE, NONE
 }

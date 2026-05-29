@@ -10,13 +10,6 @@ public class Main {
         UserInterface userInterface = new UserInterface();
         userInterface.homeMenu();
 
-        Meat meat = new Meat("steak","Small",true,true,"wagyu");
-        Cheese cheese = new Cheese("american", "small",true,true,"melted");
-        List<Ingredient> ingredients = new ArrayList<>();
-
-        //ingredients.add(meat);
-        //ingredients.add(cheese);
-
 
 
         //Sandwich sandwich = new Sandwich("Sandwich","small", "white", true, ingredients);

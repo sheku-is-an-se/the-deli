@@ -28,4 +28,9 @@ public class Drinks extends Product {
         }
         return base;
     }
+
+    @Override
+    public String toString(){
+        return getSize() + " Drink - $" + getPrice();
+    }
 }

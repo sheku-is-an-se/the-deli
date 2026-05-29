@@ -1,6 +1,6 @@
 package com.pluralsight;
 
-public abstract class Product implements Sellable {
+public abstract class Product {
     private final Size size;
     private final String name;
 
